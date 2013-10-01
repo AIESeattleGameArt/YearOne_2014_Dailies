@@ -1,14 +1,7 @@
 //Maya ASCII 2014 scene
 //Name: Shirt.ma
-//Last modified: Tue, Oct 01, 2013 09:26:51 AM
+//Last modified: Tue, Oct 01, 2013 10:23:08 AM
 //Codeset: 1252
-file -rdi 1 -ns ":" -dr 1 -rfn "Hero_BodyRN" "C:/Users/student/Desktop/ReferenceHero/References/Hero_Body.ma";
-file -rdi 1 -ns ":" -rfn "Reference_HeroRN" "C:/Users/student/Desktop/ReferenceHero/Reference_Hero.ma";
-file -rdi 2 -ns "Hero_Body" -dr 1 -rfn "Hero_BodyRN2" "/Users/mton/Google Drive/AIE/Year2014/YearOne_2014_Dailies/ReferenceHero/References/Hero_Body.ma";
-file -rdi 1 -ns ":" -dr 1 -rfn "Hero_BodyRN1" "C:/Users/student/Desktop/ReferenceHero/References/Hero_Body.ma";
-file -r -ns ":" -dr 1 -rfn "Hero_BodyRN" "C:/Users/student/Desktop/ReferenceHero/References/Hero_Body.ma";
-file -r -ns ":" -dr 1 -rfn "Reference_HeroRN" "C:/Users/student/Desktop/ReferenceHero/Reference_Hero.ma";
-file -r -ns ":" -dr 1 -rfn "Hero_BodyRN1" "C:/Users/student/Desktop/ReferenceHero/References/Hero_Body.ma";
 requires maya "2014";
 currentUnit -l centimeter -a degree -t film;
 fileInfo "application" "maya";
@@ -19,12 +12,12 @@ fileInfo "osv" "Microsoft Windows 7 Business Edition, 64-bit Windows 7 Service P
 fileInfo "license" "education";
 createNode transform -s -n "persp";
 	setAttr ".v" no;
-	setAttr ".t" -type "double3" -5.4084921497928065 16.722534895361569 16.662206362070386 ;
-	setAttr ".r" -type "double3" -21.338352730476174 -728.99999999991735 0 ;
+	setAttr ".t" -type "double3" 3.0751273486394646 9.375998260848494 16.69925269997573 ;
+	setAttr ".r" -type "double3" 5.0616472694994119 -697.79999999990116 2.1470027329187045e-016 ;
 createNode camera -s -n "perspShape" -p "persp";
 	setAttr -k off ".v" no;
 	setAttr ".fl" 34.999999999999993;
-	setAttr ".coi" 16.249720026446575;
+	setAttr ".coi" 16.249720026446624;
 	setAttr ".imn" -type "string" "persp";
 	setAttr ".den" -type "string" "persp_depth";
 	setAttr ".man" -type "string" "persp_mask";
@@ -82,7 +75,7 @@ createNode mesh -n "pCubeShape1" -p "pCube1";
 	setAttr ".dcc" -type "string" "Ambient+Diffuse";
 	setAttr ".covm[0]"  0 1 1;
 	setAttr ".cdvm[0]"  0 1 1;
-	setAttr -s 77 ".pt";
+	setAttr -s 67 ".pt";
 	setAttr ".pt[0]" -type "float3" 0.099253923 7.4505806e-008 1.1175871e-008 ;
 	setAttr ".pt[1]" -type "float3" 5.5879354e-009 0.69682026 -0.072447076 ;
 	setAttr ".pt[2]" -type "float3" 0 0.69682026 -0.072447076 ;
@@ -154,20 +147,13 @@ createNode mesh -n "pCubeShape1" -p "pCube1";
 	setAttr ".dsm" 2;
 createNode place3dTexture -n "place3dTexture1";
 createNode lightLinker -s -n "lightLinker1";
-	setAttr -s 6 ".lnk";
-	setAttr -s 6 ".slnk";
+	setAttr -s 5 ".lnk";
+	setAttr -s 5 ".slnk";
 createNode displayLayerManager -n "layerManager";
 createNode displayLayer -n "defaultLayer";
 createNode renderLayerManager -n "renderLayerManager";
 createNode renderLayer -n "defaultRenderLayer";
 	setAttr ".g" yes;
-createNode reference -n "Hero_BodyRN";
-	setAttr ".ed" -type "dataReferenceEdits" 
-		"Hero_BodyRN"
-		"Hero_BodyRN" 1
-		2 "|ReferenceHero|Template" "translate" " -type \"double3\" 0 10.553346 0";
-	setAttr ".ptag" -type "string" "";
-lockNode -l 1 ;
 createNode polyCube -n "polyCube1";
 	setAttr ".w" 3.9912925728232183;
 	setAttr ".h" 3.9518332715141975;
@@ -636,21 +622,6 @@ createNode polyTweak -n "polyTweak7";
 	setAttr ".tk[115]" -type "float3" 1.8626451e-009 0 -1.0430813e-007 ;
 createNode deleteComponent -n "deleteComponent4";
 	setAttr ".dc" -type "componentList" 2 "f[52]" "f[56]";
-createNode reference -n "sharedReferenceNode";
-	setAttr ".ed" -type "dataReferenceEdits" 
-		"sharedReferenceNode";
-createNode reference -n "Reference_HeroRN";
-	setAttr ".ed" -type "dataReferenceEdits" 
-		"Reference_HeroRN"
-		"Reference_HeroRN" 0;
-	setAttr ".ptag" -type "string" "";
-lockNode -l 1 ;
-createNode reference -n "Hero_BodyRN1";
-	setAttr ".ed" -type "dataReferenceEdits" 
-		"Hero_BodyRN1"
-		"Hero_BodyRN1" 0;
-	setAttr ".ptag" -type "string" "";
-lockNode -l 1 ;
 createNode polyExtrudeFace -n "polyExtrudeFace5";
 	setAttr ".ics" -type "componentList" 2 "f[76]" "f[79:83]";
 	setAttr ".ix" -type "matrix" 1 0 0 0 0 1 0 0 0 0 1 0 0.056947020030698514 10.304376229373243 0.6658452087349751 1;
@@ -695,20 +666,19 @@ select -ne :time1;
 	setAttr ".o" 1;
 	setAttr ".unw" 1;
 select -ne :renderPartition;
-	setAttr -s 5 ".st";
+	setAttr -s 4 ".st";
 select -ne :initialShadingGroup;
 	setAttr ".ro" yes;
 	setAttr -s 3 ".gn";
 select -ne :initialParticleSE;
 	setAttr ".ro" yes;
 select -ne :defaultShaderList1;
-	setAttr -s 5 ".s";
+	setAttr -s 4 ".s";
 select -ne :defaultTextureList1;
 select -ne :postProcessList1;
 	setAttr -s 2 ".p";
 select -ne :defaultRenderUtilityList1;
 select -ne :defaultRenderingList1;
-	setAttr -s 2 ".r";
 select -ne :renderGlobalsList1;
 select -ne :defaultResolution;
 	setAttr ".pa" 1;
@@ -722,6 +692,8 @@ select -ne :hardwareRenderingGlobals;
 select -ne :defaultHardwareRenderGlobals;
 	setAttr ".fn" -type "string" "im";
 	setAttr ".res" -type "string" "ntsc_4d 646 485 1.333";
+select -ne :ikSystem;
+	setAttr -s 4 ".sol";
 connectAttr "polyExtrudeFace5.out" "pCubeShape1.i";
 connectAttr "groupId2.id" "pCubeShape1.iog.og[0].gid";
 connectAttr "blinn2SG.mwc" "pCubeShape1.iog.og[0].gco";
@@ -740,7 +712,6 @@ relationship "shadowLink" ":lightLinker1" "blinn1SG.message" ":defaultLightSet.m
 relationship "shadowLink" ":lightLinker1" "blinn2SG.message" ":defaultLightSet.message";
 connectAttr "layerManager.dli[0]" "defaultLayer.id";
 connectAttr "renderLayerManager.rlmi[0]" "defaultRenderLayer.rlid";
-connectAttr "sharedReferenceNode.sr" "Hero_BodyRN.sr";
 connectAttr "polyTweak1.out" "polyExtrudeFace1.ip";
 connectAttr "pCubeShape1.wm" "polyExtrudeFace1.mp";
 connectAttr "polyCube1.out" "polyTweak1.ip";
@@ -787,7 +758,6 @@ connectAttr "groupParts5.og" "groupParts6.ig";
 connectAttr "groupId4.id" "groupParts6.gi";
 connectAttr "groupParts6.og" "polyTweak7.ip";
 connectAttr "polyTweak7.out" "deleteComponent4.ig";
-connectAttr "sharedReferenceNode.sr" "Hero_BodyRN1.sr";
 connectAttr "polyTweak8.out" "polyExtrudeFace5.ip";
 connectAttr "pCubeShape1.wm" "polyExtrudeFace5.mp";
 connectAttr "deleteComponent4.og" "polyTweak8.ip";
