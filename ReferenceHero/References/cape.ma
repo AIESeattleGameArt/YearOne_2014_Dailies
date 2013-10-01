@@ -1,6 +1,6 @@
 //Maya ASCII 2014 scene
 //Name: cape.ma
-//Last modified: Mon, Sep 30, 2013 06:00:18 PM
+//Last modified: Tue, Oct 01, 2013 11:13:58 AM
 //Codeset: 1252
 requires maya "2014";
 currentUnit -l centimeter -a degree -t film;
@@ -12,8 +12,8 @@ fileInfo "osv" "Microsoft Windows 7 Business Edition, 64-bit Windows 7 Service P
 fileInfo "license" "student";
 createNode transform -s -n "persp";
 	setAttr ".v" no;
-	setAttr ".t" -type "double3" 1.7385807196705172 23.810822594833503 -29.098036537748388 ;
-	setAttr ".r" -type "double3" -27.338352732492762 -540.59999999996114 0 ;
+	setAttr ".t" -type "double3" -2.5415761090737146 20.964430839806994 -30.148349896139997 ;
+	setAttr ".r" -type "double3" -21.938352732489637 -532.59999999994989 0 ;
 createNode camera -s -n "perspShape" -p "persp";
 	setAttr -k off ".v" no;
 	setAttr ".pze" yes;
@@ -3832,7 +3832,7 @@ createNode mesh -n "pasted__pCubeShape1" -p "pasted__pCube1";
 	setAttr ".dcc" -type "string" "Ambient+Diffuse";
 	setAttr ".covm[0]"  0 1 1;
 	setAttr ".cdvm[0]"  0 1 1;
-	setAttr -s 8 ".pt";
+	setAttr -s 6 ".pt";
 	setAttr ".pt[6]" -type "float3" 0 0 -0.17944749 ;
 	setAttr ".pt[9]" -type "float3" 0 0 -0.22324829 ;
 	setAttr ".pt[12]" -type "float3" 0 0.44808185 0.025609551 ;
@@ -3840,8 +3840,8 @@ createNode mesh -n "pasted__pCubeShape1" -p "pasted__pCube1";
 	setAttr ".pt[14]" -type "float3" 0 0.48462963 -0.015438422 ;
 	setAttr ".pt[15]" -type "float3" 0 0 -0.28945458 ;
 createNode lightLinker -s -n "lightLinker1";
-	setAttr -s 3 ".lnk";
-	setAttr -s 3 ".slnk";
+	setAttr -s 5 ".lnk";
+	setAttr -s 5 ".slnk";
 createNode displayLayerManager -n "layerManager";
 createNode displayLayer -n "defaultLayer";
 createNode renderLayerManager -n "renderLayerManager";
@@ -4035,18 +4035,30 @@ createNode polySplit -n "polySplit3";
 	setAttr ".sps[0].sp[2].bc" -type "double3" 0.49999925494194031 0.49999925494194031 
 		1.4603137969970703e-006 ;
 	setAttr ".c2v" yes;
+createNode lambert -n "Cape";
+	setAttr ".c" -type "float3" 0.18362778 0.183212 0.28099999 ;
+createNode shadingEngine -n "lambert2SG";
+	setAttr ".ihi" 0;
+	setAttr ".ro" yes;
+createNode materialInfo -n "materialInfo1";
+createNode blinn -n "Cape_Buttons";
+	setAttr ".c" -type "float3" 0.292 0.292 0.292 ;
+createNode shadingEngine -n "blinn1SG";
+	setAttr ".ihi" 0;
+	setAttr -s 4 ".dsm";
+	setAttr ".ro" yes;
+createNode materialInfo -n "materialInfo2";
 select -ne :time1;
 	setAttr ".o" 1;
 	setAttr ".unw" 1;
 select -ne :renderPartition;
-	setAttr -s 3 ".st";
+	setAttr -s 5 ".st";
 select -ne :initialShadingGroup;
-	setAttr -s 5 ".dsm";
 	setAttr ".ro" yes;
 select -ne :initialParticleSE;
 	setAttr ".ro" yes;
 select -ne :defaultShaderList1;
-	setAttr -s 3 ".s";
+	setAttr -s 5 ".s";
 select -ne :postProcessList1;
 	setAttr -s 2 ".p";
 select -ne :defaultRenderingList1;
@@ -4063,16 +4075,18 @@ select -ne :hardwareRenderingGlobals;
 select -ne :defaultHardwareRenderGlobals;
 	setAttr ".fn" -type "string" "im";
 	setAttr ".res" -type "string" "ntsc_4d 646 485 1.333";
-select -ne :ikSystem;
-	setAttr -s 4 ".sol";
 connectAttr "polyExtrudeFace3.out" "pSphereShape1.i";
 connectAttr "polySplit3.out" "pasted__pCubeShape1.i";
 relationship "link" ":lightLinker1" ":initialShadingGroup.message" ":defaultLightSet.message";
 relationship "link" ":lightLinker1" ":initialParticleSE.message" ":defaultLightSet.message";
 relationship "link" ":lightLinker1" "Hero_Body:stickFigure_Hero:defaultMat.message" ":defaultLightSet.message";
+relationship "link" ":lightLinker1" "lambert2SG.message" ":defaultLightSet.message";
+relationship "link" ":lightLinker1" "blinn1SG.message" ":defaultLightSet.message";
 relationship "shadowLink" ":lightLinker1" ":initialShadingGroup.message" ":defaultLightSet.message";
 relationship "shadowLink" ":lightLinker1" ":initialParticleSE.message" ":defaultLightSet.message";
 relationship "shadowLink" ":lightLinker1" "Hero_Body:stickFigure_Hero:defaultMat.message" ":defaultLightSet.message";
+relationship "shadowLink" ":lightLinker1" "lambert2SG.message" ":defaultLightSet.message";
+relationship "shadowLink" ":lightLinker1" "blinn1SG.message" ":defaultLightSet.message";
 connectAttr "layerManager.dli[0]" "defaultLayer.id";
 connectAttr "renderLayerManager.rlmi[0]" "defaultRenderLayer.rlid";
 connectAttr "Hero_Body:stickFigure_Hero:defaultMat1.oc" "Hero_Body:stickFigure_Hero:defaultMat.ss"
@@ -4097,14 +4111,24 @@ connectAttr "polyTweak1.out" "polySplit1.ip";
 connectAttr "pasted__polyCut1.out" "polyTweak1.ip";
 connectAttr "polySplit1.out" "polySplit2.ip";
 connectAttr "polySplit2.out" "polySplit3.ip";
+connectAttr "Cape.oc" "lambert2SG.ss";
+connectAttr "pasted__pCubeShape1.iog" "lambert2SG.dsm" -na;
+connectAttr "lambert2SG.msg" "materialInfo1.sg";
+connectAttr "Cape.msg" "materialInfo1.m";
+connectAttr "Cape_Buttons.oc" "blinn1SG.ss";
+connectAttr "pSphereShape1.iog" "blinn1SG.dsm" -na;
+connectAttr "pSphereShape2.iog" "blinn1SG.dsm" -na;
+connectAttr "pSphereShape3.iog" "blinn1SG.dsm" -na;
+connectAttr "pSphereShape4.iog" "blinn1SG.dsm" -na;
+connectAttr "blinn1SG.msg" "materialInfo2.sg";
+connectAttr "Cape_Buttons.msg" "materialInfo2.m";
 connectAttr "Hero_Body:stickFigure_Hero:defaultMat.pa" ":renderPartition.st" -na
 		;
-connectAttr "pasted__pCubeShape1.iog" ":initialShadingGroup.dsm" -na;
-connectAttr "pSphereShape1.iog" ":initialShadingGroup.dsm" -na;
-connectAttr "pSphereShape2.iog" ":initialShadingGroup.dsm" -na;
-connectAttr "pSphereShape3.iog" ":initialShadingGroup.dsm" -na;
-connectAttr "pSphereShape4.iog" ":initialShadingGroup.dsm" -na;
+connectAttr "lambert2SG.pa" ":renderPartition.st" -na;
+connectAttr "blinn1SG.pa" ":renderPartition.st" -na;
 connectAttr "Hero_Body:stickFigure_Hero:defaultMat1.msg" ":defaultShaderList1.s"
 		 -na;
+connectAttr "Cape.msg" ":defaultShaderList1.s" -na;
+connectAttr "Cape_Buttons.msg" ":defaultShaderList1.s" -na;
 connectAttr "defaultRenderLayer.msg" ":defaultRenderingList1.r" -na;
 // End of cape.ma
