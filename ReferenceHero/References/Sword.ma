@@ -1,6 +1,6 @@
 //Maya ASCII 2014 scene
 //Name: Sword.ma
-//Last modified: Tue, Oct 01, 2013 10:06:33 AM
+//Last modified: Tue, Oct 01, 2013 10:54:04 AM
 //Codeset: 1252
 requires maya "2014";
 currentUnit -l centimeter -a degree -t film;
@@ -63,7 +63,8 @@ createNode camera -s -n "sideShape" -p "side";
 	setAttr ".man" -type "string" "side_mask";
 	setAttr ".hc" -type "string" "viewSet -s %camera";
 	setAttr ".o" yes;
-createNode transform -n "sword";
+createNode transform -n "Sword";
+createNode transform -n "sword" -p "Sword";
 	setAttr ".t" -type "double3" -2.443947216852477 6.3121516950618135 6.7040217851663888 ;
 	setAttr ".r" -type "double3" 106.38077080141863 7.512755957126676 -17.084383242429702 ;
 	setAttr ".s" -type "double3" 1.4035566798065513 1.4035566798065513 1.4035566798065513 ;
@@ -390,8 +391,8 @@ createNode mesh -n "swordShape" -p "sword";
 		-0.011861705 -1.5973712 0.290279 -0.01573965 -1.5515171 0.34581172;
 	setAttr ".dr" 1;
 createNode lightLinker -s -n "lightLinker1";
-	setAttr -s 2 ".lnk";
-	setAttr -s 2 ".slnk";
+	setAttr -s 3 ".lnk";
+	setAttr -s 3 ".slnk";
 createNode displayLayerManager -n "layerManager";
 createNode displayLayer -n "defaultLayer";
 createNode renderLayerManager -n "renderLayerManager";
@@ -2616,17 +2617,22 @@ createNode polySplitRing -n "polySplitRing44";
 	setAttr ".sma" 29.999999999999996;
 	setAttr ".p[0]"  0 0 1;
 	setAttr ".fq" yes;
+createNode lambert -n "sword_material";
+createNode shadingEngine -n "lambert2SG";
+	setAttr ".ihi" 0;
+	setAttr ".ro" yes;
+createNode materialInfo -n "materialInfo1";
 select -ne :time1;
 	setAttr ".o" 1;
 	setAttr ".unw" 1;
 select -ne :renderPartition;
-	setAttr -s 2 ".st";
+	setAttr -s 3 ".st";
 select -ne :initialShadingGroup;
 	setAttr ".ro" yes;
 select -ne :initialParticleSE;
 	setAttr ".ro" yes;
 select -ne :defaultShaderList1;
-	setAttr -s 2 ".s";
+	setAttr -s 3 ".s";
 select -ne :postProcessList1;
 	setAttr -s 2 ".p";
 select -ne :defaultRenderingList1;
@@ -2646,8 +2652,10 @@ select -ne :defaultHardwareRenderGlobals;
 connectAttr "polySplitRing44.out" "swordShape.i";
 relationship "link" ":lightLinker1" ":initialShadingGroup.message" ":defaultLightSet.message";
 relationship "link" ":lightLinker1" ":initialParticleSE.message" ":defaultLightSet.message";
+relationship "link" ":lightLinker1" "lambert2SG.message" ":defaultLightSet.message";
 relationship "shadowLink" ":lightLinker1" ":initialShadingGroup.message" ":defaultLightSet.message";
 relationship "shadowLink" ":lightLinker1" ":initialParticleSE.message" ":defaultLightSet.message";
+relationship "shadowLink" ":lightLinker1" "lambert2SG.message" ":defaultLightSet.message";
 connectAttr "layerManager.dli[0]" "defaultLayer.id";
 connectAttr "renderLayerManager.rlmi[0]" "defaultRenderLayer.rlid";
 connectAttr "polyCube1.out" "polySplitRing1.ip";
@@ -2883,6 +2891,11 @@ connectAttr "swordShape.wm" "polySplitRing43.mp";
 connectAttr "polySplitRing42.out" "polyTweak21.ip";
 connectAttr "polySplitRing43.out" "polySplitRing44.ip";
 connectAttr "swordShape.wm" "polySplitRing44.mp";
-connectAttr "swordShape.iog" ":initialShadingGroup.dsm" -na;
+connectAttr "sword_material.oc" "lambert2SG.ss";
+connectAttr "swordShape.iog" "lambert2SG.dsm" -na;
+connectAttr "lambert2SG.msg" "materialInfo1.sg";
+connectAttr "sword_material.msg" "materialInfo1.m";
+connectAttr "lambert2SG.pa" ":renderPartition.st" -na;
+connectAttr "sword_material.msg" ":defaultShaderList1.s" -na;
 connectAttr "defaultRenderLayer.msg" ":defaultRenderingList1.r" -na;
 // End of Sword.ma
