@@ -1,6 +1,6 @@
 //Maya ASCII 2014 scene
-//Name: TheTruth_MTON.ma
-//Last modified: Tue, Oct 01, 2013 11:05:42 AM
+//Name: TheTruth_MTON.0001.ma
+//Last modified: Tue, Oct 01, 2013 11:36:00 AM
 //Codeset: UTF-8
 file -rdi 1 -ns "Boots" -rfn "BootsRN" "/Users/mton/Google Drive/AIE/Year2014/YearOne_2014_Dailies//ReferenceHero/References/Boots.ma";
 file -rdi 1 -ns "cape" -rfn "capeRN" "/Users/mton/Google Drive/AIE/Year2014/YearOne_2014_Dailies//ReferenceHero/References/cape.ma";
@@ -28,6 +28,7 @@ file -r -ns "Watch_Staff" -dr 1 -rfn "Watch_StaffRN" "/Users/mton/Google Drive/A
 file -r -ns "Tail" -dr 1 -rfn "TailRN" "/Users/mton/Google Drive/AIE/Year2014/YearOne_2014_Dailies//ReferenceHero/References/Tail.ma";
 requires maya "2014";
 currentUnit -l centimeter -a degree -t film;
+fileInfo "exportedFrom" "/Users/mton/Google Drive/AIE/Year2014/YearOne_2014_Dailies/ReferenceHero/TheTruth_MTON.ma";
 fileInfo "application" "maya";
 fileInfo "product" "Maya 2014";
 fileInfo "version" "2014 x64";
@@ -36,12 +37,12 @@ fileInfo "osv" "Mac OS X 10.8.5";
 fileInfo "license" "student";
 createNode transform -s -n "persp";
 	setAttr ".v" no;
-	setAttr ".t" -type "double3" -29.293936789747345 19.63730097987866 25.886046503596319 ;
-	setAttr ".r" -type "double3" -18.938352729602379 -50.600000000000115 0 ;
+	setAttr ".t" -type "double3" 8.8858432664272442 9.0841538539141418 25.227855591308405 ;
+	setAttr ".r" -type "double3" -5.1383527296023992 22.199999999999818 2.1470027329171894e-16 ;
 createNode camera -s -n "perspShape" -p "persp";
 	setAttr -k off ".v" no;
 	setAttr ".fl" 34.999999999999986;
-	setAttr ".coi" 39.397416359651217;
+	setAttr ".coi" 24.936180529323785;
 	setAttr ".imn" -type "string" "persp";
 	setAttr ".den" -type "string" "persp_depth";
 	setAttr ".man" -type "string" "persp_mask";
@@ -281,4 +282,4 @@ connectAttr "layerManager.dli[0]" "defaultLayer.id";
 connectAttr "renderLayerManager.rlmi[0]" "defaultRenderLayer.rlid";
 connectAttr "sharedReferenceNode.sr" "BootsRN.sr";
 connectAttr "defaultRenderLayer.msg" ":defaultRenderingList1.r" -na;
-// End of TheTruth_MTON.ma
+// End of TheTruth_MTON.0001.ma
