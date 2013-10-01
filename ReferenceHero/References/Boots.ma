@@ -1,6 +1,6 @@
 //Maya ASCII 2014 scene
 //Name: Boots.ma
-//Last modified: Tue, Oct 01, 2013 10:03:21 AM
+//Last modified: Tue, Oct 01, 2013 10:33:58 AM
 //Codeset: 1252
 requires maya "2014";
 currentUnit -l centimeter -a degree -t film;
@@ -12,12 +12,12 @@ fileInfo "osv" "Microsoft Windows 7 Business Edition, 64-bit Windows 7 Service P
 fileInfo "license" "student";
 createNode transform -s -n "persp";
 	setAttr ".v" no;
-	setAttr ".t" -type "double3" 2.7616634266509115 4.6094717031027601 12.180714484860641 ;
-	setAttr ".r" -type "double3" 350.66164727066842 -349.80000000006368 -2.0197678792897277e-016 ;
+	setAttr ".t" -type "double3" 6.3643401609120849 7.2183066429453726 10.088865422948039 ;
+	setAttr ".r" -type "double3" 338.06164727062662 -329.8000000000257 9.2000677165208371e-016 ;
 createNode camera -s -n "perspShape" -p "persp";
 	setAttr -k off ".v" no;
 	setAttr ".fl" 34.999999999999986;
-	setAttr ".coi" 12.343997977603825;
+	setAttr ".coi" 12.343997977603912;
 	setAttr ".imn" -type "string" "persp";
 	setAttr ".den" -type "string" "persp_depth";
 	setAttr ".man" -type "string" "persp_mask";
@@ -64,8 +64,8 @@ createNode camera -s -n "sideShape" -p "side";
 	setAttr ".man" -type "string" "side_mask";
 	setAttr ".hc" -type "string" "viewSet -s %camera";
 	setAttr ".o" yes;
-createNode transform -n "ReferenceHero";
-createNode transform -n "Template" -p "ReferenceHero";
+createNode transform -n "Boots";
+createNode transform -n "Template" -p "Boots";
 	setAttr ".t" -type "double3" 0 10.553345581106232 0 ;
 createNode mesh -n "TemplateShape" -p "Template";
 	setAttr -k off ".v";
@@ -190,9 +190,9 @@ createNode mesh -n "polySurfaceShape1" -p "Template";
 	setAttr ".cvd" -type "dataPolyComponent" Index_Data Vertex 0 ;
 	setAttr ".hfd" -type "dataPolyComponent" Index_Data Face 0 ;
 	setAttr ".db" yes;
-createNode place3dTexture -n "place3dTexture1";
+createNode place3dTexture -n "place3dTexture1" -p "Boots";
 	setAttr ".s" -type "double3" 5 5 5 ;
-createNode place3dTexture -n "place3dTexture2";
+createNode place3dTexture -n "place3dTexture2" -p "Boots";
 createNode lightLinker -s -n "lightLinker1";
 	setAttr -s 4 ".lnk";
 	setAttr -s 4 ".slnk";
